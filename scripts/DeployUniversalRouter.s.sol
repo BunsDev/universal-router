@@ -9,14 +9,14 @@ import {UnsupportedProtocol} from "contracts/deploy/UnsupportedProtocol.sol";
 import {UniversalRouter} from "contracts/UniversalRouter.sol";
 import {Permit2} from 'permit2/src/Permit2.sol';
 
-bytes32 constant SALT = bytes32(uint256(0x1234));
+bytes32 constant SALT = bytes32(uint256(0x00000000000000000000000000000000000000005eb67581652632000a6cbedf));
 
 contract DeployUniversalRouter is Script {
   using stdJson for string;
 
     function setUp() public {}
 
-    function run(RouterParameters memory params) public returns (Router router) {
+    function run(RouterParameters memory params) public returns (UniversalRouter router) {
         vm.startBroadcast();
 
         address unsupported = address(new UnsupportedProtocol{salt: SALT}());
@@ -48,11 +48,11 @@ contract DeployUniversalRouter is Script {
         return router;
     }
 
-    function run(string memory pathToJSON) public returns (Router router) {
+    function run(string memory pathToJSON) public returns (UniversalRouter router) {
         return run(fetchParameters(pathToJSON));
     }
 
-    function runAndDeployPermit2(string memory pathToJSON) public returns (Router router) {
+    function runAndDeployPermit2(string memory pathToJSON) public returns (UniversalRouter router) {
         RouterParameters memory params = fetchParameters(pathToJSON);
         return run(params);
         vm.startBroadcast();
@@ -60,7 +60,7 @@ contract DeployUniversalRouter is Script {
         params.permit2 = permit2;
         console2.log("Permit2 Deployed:", address(permit2));
 
-        return run(params));
+        return run(params);
     }
 
     function fetchParameters(string memory pathToJSON) internal returns (RouterParameters memory params) {
