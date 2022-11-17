@@ -3,9 +3,9 @@
   "description": "Smart contracts for Universal Router",
   "license": "GPL-2.0-or-later",
   "publishConfig": {
-    "access": "private"
+    "access": "restricted"
   },
-  "version": "0.0.1",
+  "version": "1.0.0",
   "keywords": [
     "uniswap",
     "router",
@@ -28,7 +28,7 @@
     "!artifacts/contracts/base/**/*"
   ],
   "engines": {
-    "node": ">=16"
+    "node": "^16"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
@@ -58,7 +58,7 @@
     "compile": "hardhat compile",
     "test": "hardhat test",
     "test:gas": "UPDATE_SNAPSHOT=1 yarn test --grep gas",
-    "presymlink": "rm -rf ./solmate && rm -rf ./openzeppelin-contracts && rm -rf ./permitpost",
+    "presymlink": "rm -rf ./solmate && rm -rf ./permit2 && rm -rf ./openzeppelin-contracts",
     "symlink": "ln -s ./lib/solmate/src ./solmate && ln -s ./lib/permit2 ./permit2 && ln -s ./lib/openzeppelin-contracts ./openzeppelin-contracts",
     "prettier:fix": "prettier --write '**/*.ts' && forge fmt",
     "prettier": "prettier --check '**/*.ts' && forge fmt --check"
